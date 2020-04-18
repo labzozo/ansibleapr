@@ -1,0 +1,17 @@
+---  #this playbook is setup webserver
+- hosts: server2
+  remote_user: test1000
+  become: yes
+  vars:
+        install: "True"
+  tasks:
+      - name: Install httpd package
+        yum: name=httpd state=installed
+        when: install  == "True" and ansible_os_family == "ReHat"
+      - name: Install apache2 package
+        apt: name=apache2 state=installed
+        when: ansible_os_family == "Debian" or install == "False"
+      - name: copy index.html
+        copy: src=index.html dest=/var/www/html
+      - name: start httpd service
+        service: name=httpd state=started

@@ -1,0 +1,13 @@
+---  #this playbook is setup webserver
+- hosts: webserver 
+  remote_user: test1000
+  become: yes
+  tasks:
+      - name: Install httpd package
+        command: yum install httpd -y
+      - name: copy index.html
+        shell: echo "testing" > /var/www/html/index.html
+      - name: start httpd service
+        script: ./test1.sh
+      - name: start httpd service
+        raw: systemctl start httpd 

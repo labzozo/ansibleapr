@@ -1,0 +1,9 @@
+---
+- hosts: server2
+  remote_user: test1000
+  become: yes
+  vars:
+         pkg: httpd
+  tasks:
+      - name: copy xyz file 
+        template: src=xyz.j2 dest=/var/www/html/xyz

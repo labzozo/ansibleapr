@@ -1,0 +1,8 @@
+---  #this playbook is setup webserver
+- hosts: webserver 
+  remote_user: test1000
+  become: yes
+  tasks:
+     - include: install.yml
+     - include: copy.yml
+     - include: service.yml
